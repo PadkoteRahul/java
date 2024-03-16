@@ -1,0 +1,101 @@
+/*
+Narayana is given a positive number N.
+His task is to find a value P such that the value of (N - P*P) is 0.
+If P can be found, print "true". Otherwise print "false".
+
+Note: 
+	- do not use built-in functions/methods 
+	- solve it in O(log(N)) time.
+ 
+Input Format:
+-------------
+An integer N.
+
+Output Format:
+--------------
+Print a boolean value.
+ 
+ 
+Sample Input-1:
+---------------
+9
+ 
+Sample Output-1:
+----------------
+true
+ 
+ 
+Sample Input-2:
+---------------
+15
+ 
+Sample Output-2:
+----------------
+false
+
+
+=== testcases ===
+case =1
+input =25
+output =true
+   
+case =2
+input =27
+output =false
+ 
+case =3
+input =29888089
+output =true
+ 
+case =4
+input =29887649
+output =false
+ 
+case =5
+input =651883024
+output =true
+ 
+case =6
+input =876585275
+output =false
+ 
+case =7
+input =30858025
+output =true
+ 
+case =8
+input =3987425
+output =false
+
+*/
+import java.util.*;
+
+class Test4 {
+		  public boolean isPerfectSquare(int num) {
+		    if (num < 2) {
+		      return true;
+		    }
+
+		    long left = 2, right = num / 2, x, guessSquared;
+		    while (left <= right) {
+		      x = left + (right - left) / 2;
+		      guessSquared = x * x;
+		      if (guessSquared == num) {
+		        return true;
+		      }
+		      if (guessSquared > num) {
+		        right = x - 1;
+		      } else {
+		        left = x + 1;
+		      }
+		    }
+		    return false;
+		  }
+	 
+    public static void main(String[] args)
+    {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		System.out.println(new Test4().isPerfectSquare(n));
+    }
+   }

@@ -1,0 +1,116 @@
+/*
+There are n cubes printed a number on each of  them,
+The cubes are placed in a row indexed from 0 to n-1, 
+in ascending order of numbers printed on them.
+
+Your task is to find the smallest index  I of the row, 
+where index I equals to the number printed on the cube.
+
+If no such index found, print -1.
+
+NOTE: use a method/function  to find the smallest index I of the row.
+and use binary search approach.
+
+Input Format:
+-------------
+Line-1: An integer n, number of cubes.
+Line-2: n space separated integers, 
+numbers printed on the cubes in the row.
+
+Output Format:
+--------------
+Print an integer, smallest index possible.
+
+
+Sample Input-1:
+---------------
+5
+-10,-5,0,3,4
+
+Sample Output-1:
+----------------
+3
+
+Explanation:
+------------
+Cubes in the row, row[0] = -10, row[1] = -5, row[2] = 0, row[3] = 3, row[4]=4.
+There are 2 indices possible 3 and 4, but you need to find the smallest index, 
+so answer is 3
+
+
+Sample Input-2:
+---------------
+5
+0 2 4 5 7
+
+Sample Output-2:
+----------------
+0
+
+
+=== testcases ===
+case =1
+input =5
+0 1 2 3 4
+output =0
+
+case =2
+input =5
+-10 -5 1 3 5
+output =3
+
+case =3
+input =10
+-12 -8 -7 -6 0 1 4 7 10 13
+output =7
+
+case =4
+input =15
+-12 -8 -7 -6 -5 -4 -2 1 4 9 10 13 21 23 26
+output =9
+
+case =5
+input =11
+-40 -35 -30 -25 -20 -15 -10 -5 0 5 10
+output =10
+
+case =6
+input =20
+-20 -17 -15 -14 -12 -10 -9 -7 -5 -4 -3 -1 0 1 3 5 8 10 12 19 25
+output =19
+
+case =7
+input =25
+-20 -17 -15 -14 -12 -10 -9 -7 -5 -4 -3 -1 0 1 3 5 8 10 12 15 18 20 22 24 28
+output =22
+
+case =8
+input =20
+-3 -1 0 1 3 5 8 10 12 14 18 20 22 24 28 34 36 39 45 50
+output =5
+
+*/
+import java.util.*;
+
+class CubeIndex {
+    public int cubeIndex(int[] A) {
+        int l = 0, r = A.length - 1;
+        while (l < r) {
+            int m = (l + r) / 2;
+            if (A[m] - m < 0)
+                l = m + 1;
+            else
+                r = m;
+        }
+        return A[l] == l ? l : -1;
+    }
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++)
+			arr[i]=sc.nextInt();
+		System.out.println(new CubeIndex().cubeIndex(arr));
+	}
+}

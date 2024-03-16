@@ -1,0 +1,99 @@
+/*
+Rohan has a habit of writing a word in reverse as R and then checks whether 
+R is same as Original word W. If R is not same as W, he can remove only one 
+character from R to make it as W.
+
+Print 'true', if Rohan makes R equals W, Otherwise print 'false'.
+
+Input Format:
+-------------
+Line-1: A string represents a word.
+
+Output Format:
+--------------
+return a boolean result.
+
+
+Sample Input-1:
+---------------
+bcba
+
+Sample Output-1:
+----------------
+true
+
+Explanation:
+------------
+By removing charcter 'a', we will get the word in reverse is also same.
+
+
+Sample Input-2:
+---------------
+abcd
+
+Sample Output-2:
+----------------
+false
+
+Explanation:
+-------------
+There is no possibility to make the reverse is also same.
+
+=== testcases ===
+case =1
+input =abcdba
+output =true
+
+case =2
+input =xzsdfha
+output =false
+
+case =3
+input =qwetyytewq
+output =true
+
+case =4
+input =abbbbaaaaba
+output =false
+
+case =5
+input =aghhga
+output =true
+
+case =6
+input =lirill
+output =true
+
+case =7
+input =asddsabb
+output =false
+
+case =8
+input =abcdefghhgfdcba
+output =true
+
+*/
+import java.util.*;
+
+class Test5 {
+	public boolean validPalindrome(String s) {
+		int l = -1, r = s.length();
+		while (++l < --r) 
+			if (s.charAt(l) != s.charAt(r)) return isPalindromic(s, l, r+1) || isPalindromic(s, l-1, r);
+		return true;
+	}
+
+	public boolean isPalindromic(String s, int l, int r) {
+		while (++l < --r) 
+			if (s.charAt(l) != s.charAt(r)) return false;
+		return true;
+	}
+	 
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		String s=sc.next();    
+
+		System.out.println(new Test5().validPalindrome(s));
+	}
+}

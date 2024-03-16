@@ -1,0 +1,41 @@
+import java.util.*;
+
+class DFS{
+    public static boolean solve(int[][] grid, int n)
+    {
+        if(dfs(grid, 0, 0, n) == false) return false;
+        return true;
+    }
+
+    public dfs(int[][] grid, int row, int col, int n)
+    {
+        if(x == n-1 && y == n-1 && grid[row][col] == 1) 
+        {
+            grid[row][col] = 0;
+            return true;
+        }
+
+        if(isinbounds(grid, row, col) == true)
+        {
+            grid[row][col] = 0;
+
+            if(dfs(grid, row+1, col)) return true;
+            if(dfs(grid, row, col+1)) return true;
+            return false;
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(Sytem.in);
+        int n = sc.nextInt();
+        int[][] grid = new int[n][n];
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+                grid[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println(solve(grid, n));
+    }
+}

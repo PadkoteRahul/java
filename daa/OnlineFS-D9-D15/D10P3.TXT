@@ -1,0 +1,108 @@
+/*
+Vishal has given a task to find the successor of a given alphabet 'alp' 
+in a given string str[]. The alphabets in the given string str[] are 
+all lowercase letters and always in non-decreasing order.
+
+A successor of 'alp' is the next smallest alphabet exist in the string str[],
+which is greater than 'alp'. Assume that alphabets can be considered in 
+cyclic fashion. For example: Successor for alp='z' in str[]="bcd" is 'b'.
+
+Help Vishal to return the answer.
+
+Can you solve it in O(log(n)) complexity?
+
+Input Format:
+-------------
+Line-1:A string str[]
+Line-2: a character represents an alphabet.
+ 
+Output Format:
+--------------
+Print a character which is the successor.
+ 
+Constraints:
+ 2 <= str.length<= 10^4
+'alp' is a lowercase letter.
+
+ 
+Sample Input-1:
+---------------
+adghijl
+f 
+Sample Output-1:
+----------------
+g
+
+Sample Input-2:
+---------------
+abcdefghi
+j
+
+Sample Output-2:
+----------------
+a
+
+
+=== testcases ===
+case =1
+input =cfj
+s
+output =c
+
+case =2
+input =adghijl
+f
+output =g
+   
+case =3
+input =bcdy
+z
+output =b
+
+case =4
+input =fjlrs
+t
+output =f
+
+case =5
+input =ghijlmnsxy
+o
+output =s
+   
+case =6
+input =abcdefghi
+j
+output =a
+   
+case =7
+input =xyz
+x
+output =y
+
+case =8
+input =aceghklmnxyz
+i
+output =k
+
+*/
+import java.util.*;
+
+class Test
+{
+	public char nextGreatestLetter(char[] letters, char target) {
+        int lo = 0, hi = letters.length;
+        while (lo < hi) {
+            int mi = lo + (hi - lo) / 2;
+            if (letters[mi] <= target) lo = mi + 1;
+            else hi = mi;
+        }
+        return letters[lo % letters.length];
+    }
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		char[] a = sc.next().toCharArray();
+		char target=sc.next().charAt(0);
+		System.out.println(new Test(). nextGreatestLetter(a,target));
+	}
+}

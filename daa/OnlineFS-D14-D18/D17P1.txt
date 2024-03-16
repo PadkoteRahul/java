@@ -1,0 +1,104 @@
+/*
+Mr Sayyad is given a list of words. Mr Sayyad observed a similarity among 
+the list of words, there exists a common subword in every word in the list, 
+from the index-0 (from the beginning of the word). 
+
+Your task is to find out the common subword which is largest.
+
+Input Format:
+-------------
+Single line space separated integers, the list[].
+
+Output Format:
+--------------
+Print the string, the largest common word.
+
+
+Sample Input-1:
+---------------
+money monkey monday
+
+Sample Output-1:
+----------------
+mon
+
+
+Sample Input-2:
+---------------
+corn cook book clock
+
+Sample Output-2:
+----------------
+""  //empty string
+
+
+=== testcases ===
+case =1
+input =money monkey monday
+output ='mon'
+
+case =2
+input =corn cook book clock
+output =''
+
+case =3
+input =flower flow flown flew fly flight
+output ='fl'
+
+case =4
+input =corn cook clock
+output ='c'
+
+case =5
+input =coding codezen codingninja coders
+output ='cod'
+
+case =6
+input =abcdefghijk abcdefghij abcdefgh abcdefghrewq abcdefghjklmno
+output =abcdefgh
+
+case =7
+input =interactive international intermediate internet interfere interlude interim intervene
+output ='inter'
+
+case =8
+input =commonsensible commonsensical commonplaceness commonwealth commonsense commonweal commonage
+output ='common'
+
+
+*/
+import java.util.*;
+
+class LCP {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) return "";    
+            return longestCommonPrefix(strs, 0 , strs.length - 1);
+    }
+
+    private String longestCommonPrefix(String[] strs, int l, int r) {
+        if (l == r) {
+            return strs[l];
+        }
+        else {
+            int mid = (l + r)/2;
+            String lcpLeft =   longestCommonPrefix(strs, l , mid);
+            String lcpRight =  longestCommonPrefix(strs, mid + 1,r);
+            return commonPrefix(lcpLeft, lcpRight);
+       }
+    }
+
+    String commonPrefix(String left,String right) {
+        int min = Math.min(left.length(), right.length());       
+        for (int i = 0; i < min; i++) {
+            if ( left.charAt(i) != right.charAt(i) )
+                return left.substring(0, i);
+        }
+        return left.substring(0, min);
+    }
+	
+	public static void main(String args[]) {
+		Scanner sc= new Scanner(System.in);
+		String[] words = sc.nextLine().split(" ");
+		System.out.println(new LCP().longestCommonPrefix(words));
+	}
+}

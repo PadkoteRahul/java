@@ -1,0 +1,116 @@
+/*
+In an Youngsters-Health Event girls from ABC school and 
+boys from XYZ school are formed in a line.
+All the boys stand in frontside b1,b2,b3,...,bn.
+All the girls stand in backside g1,g2,g3,....,gn.
+And the line looks like, b1,b2,b3,...,bn,g1,g2,g3,...,gn.
+
+You are given a 2N list of integers, first N integers indiactes boys roll numbers,
+last N integers indiactes girls roll numbers.
+
+Now, you need transform their positions like below:
+b1,g1,b2,g2,b3,g3,.......,bn,gn.
+
+And print the updated list after transform their positions.
+
+
+Input Format:
+-------------
+Line-1: An integer N, 2*N students.
+Line-2: 2*N space separated integers, student roll numbers.
+
+Output Format:
+--------------
+Print the list of 2*N integers.
+
+
+Sample Input-1:
+---------------
+3
+2 5 1 3 4 7
+
+Sample Output-1:
+----------------
+2 3 5 4 1 7
+
+Explanation: 
+------------
+Given list, b1 =2, b2 =5, b3 =1, g1 =3, g2 =4, g3 =7 
+the answer is [2,3,5,4,1,7].
+
+Sample Input-2:
+---------------
+4
+1 2 3 4 3 4 2 1
+
+Sample Output-2:
+----------------
+1 3 2 4 3 2 4 1
+
+
+=== testcases ===
+case =1
+input =5
+1 31 14 22 10 12 25 2 59 16
+output =1 12 31 25 14 2 22 59 10 16 
+
+case =2
+input =3
+2 5 1 3 4 7
+output =2 3 5 4 1 7 
+
+case =3
+input =4
+1 2 3 4 3 4 2 1
+output =1 3 2 4 3 2 4 1 
+
+case =4
+input =9
+7 5 37 16 38 19 60 12 54 32 20 10 34 50 53 52 26 28
+output =7 32 5 20 37 10 16 34 38 50 19 53 60 52 12 26 54 28
+
+case =5
+input =10
+3 1 5 54 52 7 16 45 22 5 19 34 33 30 52 23 44 20 32 1
+output =3 19 1 34 5 33 54 30 52 52 7 23 16 44 45 20 22 32 5 1
+
+case =6
+input =15
+44 35 57 17 48 47 1 12 23 48 21 3 36 15 57 26 45 40 53 39 14 28 1 22 4 60 9 38 59 43
+output =44 26 35 45 57 40 17 53 48 39 47 14 1 28 12 1 23 22 48 4 21 60 3 9 36 38 15 59 57 43
+
+case =7
+input =15
+18 9 27 52 18 31 20 29 22 3 19 26 34 24 8 35 46 54 29 23 49 5 37 38 31 22 40 8 39 15
+output =18 35 9 46 27 54 52 29 18 23 31 49 20 5 29 37 22 38 3 31 19 22 26 40 34 8 24 39 8 15
+
+case =8
+input =25
+4 91 76 25 56 77 42 34 70 86 36 41 57 11 63 5 97 11 10 82 67 26 17 38 35 9 39 66 73 70 81 40 59 75 91 29 28 63 34 6 44 67 15 87 14 37 93 43 23 72
+output =4 9 91 39 76 66 25 73 56 70 77 81 42 40 34 59 70 75 86 91 36 29 41 28 57 63 11 34 63 6 5 44 97 67 11 15 10 87 82 14 67 37 26 93 17 43 38 23 35 72
+
+
+*/
+
+import java.util.*;
+
+class GirlsandBoys {
+    public int[] shuffle(int[] nums, int n) {
+        int[] res = new int[2 * n];
+        for(int i = 0; i < nums.length; i++)
+            res[i] = i % 2 == 0 ? nums[i/2] : nums[n + i/2];
+        return res;
+    }
+	
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int arr[]=new int[2*n];
+		for(int i=0;i<2*n;i++)
+			arr[i]=sc.nextInt();
+		int res[]=new GirlsandBoys().shuffle(arr,n);
+		for(int i:res)
+		System.out.print(i+" ");
+	}
+}

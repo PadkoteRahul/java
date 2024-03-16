@@ -1,0 +1,126 @@
+/*
+You are given an integer N,
+You need to apply the following conditions on first N natural numbers.
+where 1<=k<=N.
+	1. If k is divisible by 2 print Fizz
+	2. If k is divisible by 3 print Buzz
+	3. If k is divisible by 5 print Jazz
+	4. If k is divisible by both 2 & 3 only print FizzBuzz 
+	5. If k is divisible by both 3 & 5 only print BuzzJazz 
+	6. If k is divisible by both 5 & 2 only print JazzFizz 
+	7. If k is divisible by both 2, 3 & 5 print FizzBuzzJazz
+If none of the conditions satisfied print k.
+
+
+Input Format:
+-------------
+An integer N
+
+Output Format:
+--------------
+Print the output as shown in testcase.
+
+
+Sample Input-1:
+---------------
+10
+
+Sample Output-1:
+----------------
+[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz]
+
+
+Sample Input-2:
+---------------
+15
+
+Sample Output-2:
+----------------
+[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz]
+
+
+
+=== testcases ===
+case =1
+input =15
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz]
+
+case =2
+input =10
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz]
+
+case =3
+input =25
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz, Fizz, 17, FizzBuzz, 19, JazzFizz, Buzz, Fizz, 23, FizzBuzz, Jazz]
+
+case =4
+input =30
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz, Fizz, 17, FizzBuzz, 19, JazzFizz, Buzz, Fizz, 23, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 29, FizzBuzzJazz]
+
+case =5
+input =50
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz, Fizz, 17, FizzBuzz, 19, JazzFizz, Buzz, Fizz, 23, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 29, FizzBuzzJazz, 31, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 37, Fizz, Buzz, JazzFizz, 41, FizzBuzz, 43, Fizz, BuzzJazz, Fizz, 47, FizzBuzz, 49, JazzFizz]
+
+case =6
+input =75
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz, Fizz, 17, FizzBuzz, 19, JazzFizz, Buzz, Fizz, 23, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 29, FizzBuzzJazz, 31, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 37, Fizz, Buzz, JazzFizz, 41, FizzBuzz, 43, Fizz, BuzzJazz, Fizz, 47, FizzBuzz, 49, JazzFizz, Buzz, Fizz, 53, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 59, FizzBuzzJazz, 61, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 67, Fizz, Buzz, JazzFizz, 71, FizzBuzz, 73, Fizz, BuzzJazz]
+
+case =7
+input =90
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz, Fizz, 17, FizzBuzz, 19, JazzFizz, Buzz, Fizz, 23, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 29, FizzBuzzJazz, 31, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 37, Fizz, Buzz, JazzFizz, 41, FizzBuzz, 43, Fizz, BuzzJazz, Fizz, 47, FizzBuzz, 49, JazzFizz, Buzz, Fizz, 53, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 59, FizzBuzzJazz, 61, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 67, Fizz, Buzz, JazzFizz, 71, FizzBuzz, 73, Fizz, BuzzJazz, Fizz, 77, FizzBuzz, 79, JazzFizz, Buzz, Fizz, 83, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 89, FizzBuzzJazz]
+
+case =8
+input =45
+output =[1, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 7, Fizz, Buzz, JazzFizz, 11, FizzBuzz, 13, Fizz, BuzzJazz, Fizz, 17, FizzBuzz, 19, JazzFizz, Buzz, Fizz, 23, FizzBuzz, Jazz, Fizz, Buzz, Fizz, 29, FizzBuzzJazz, 31, Fizz, Buzz, Fizz, Jazz, FizzBuzz, 37, Fizz, Buzz, JazzFizz, 41, FizzBuzz, 43, Fizz, BuzzJazz]
+
+*/
+import java.util.*;
+
+class FizzBuzzJazz {
+  public List<String> fizzBuzzJazz(int n) {
+    // ans list
+    List<String> ans = new ArrayList<String>();
+
+    for (int num = 1; num <= n; num++) {
+	  boolean divisibleBy2 = (num % 2 == 0);
+      boolean divisibleBy3 = (num % 3 == 0);
+      boolean divisibleBy5 = (num % 5 == 0);
+	  if (divisibleBy3 && divisibleBy5 && divisibleBy2 ) {
+        // Divides by both 2 and 3 and 5, add FizzBuzzJazz
+        ans.add("FizzBuzzJazz");
+      }
+	 else if (divisibleBy2 && divisibleBy3) {
+        // Divides by both 2 and 3, add FizzBuzz
+        ans.add("FizzBuzz");
+      }
+	   else if (divisibleBy3 && divisibleBy5) {
+        // Divides by both 3 and 5, add BuzzJazz
+        ans.add("BuzzJazz");
+      }
+      else if (divisibleBy2 && divisibleBy5) {
+        // Divides by both 7 and 2, add JazzFizz
+        ans.add("JazzFizz");
+      } else if (divisibleBy2) {
+        // Divides by 2, add Fizz
+        ans.add("Fizz");
+      } else if (divisibleBy3) {
+        // Divides by 3, add Buzz
+        ans.add("Buzz");
+      } else if (divisibleBy5) {
+        // Divides by 5, add Jazz
+        ans.add("Jazz");
+      }
+	 else {
+        // Not divisible by 2 or 3 or 5, add the number
+        ans.add(Integer.toString(num));
+      }
+    }
+    return ans;
+  }
+  	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int num=sc.nextInt();
+		System.out.println(new FizzBuzzJazz().fizzBuzzJazz(num));
+	}
+}
